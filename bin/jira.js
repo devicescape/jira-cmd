@@ -83,6 +83,17 @@ requirejs([
     });
 
   program
+    .command('tested <issue>')
+    .description('Mark issue as tested.')
+    .action(function (issue, options) {
+      auth.setConfig(function (auth) {
+        if (auth) {
+          transitions.tested(issue, options.resolution);
+        }
+      });
+    });
+
+  program
     .command('done <issue>')
     .option('-r, --resolution <name>', 'resolution name (e.g. \'Resolved\')', String)
     .option('-t, --timeSpent <time>', 'how much time spent (e.g. \'3h 30m\')', String)
